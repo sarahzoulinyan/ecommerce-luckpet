@@ -99,7 +99,7 @@ function calculatePasswordStrength(password) {
         if (strengthElement) {
             strengthElement.style.display = 'none';
         }
-        return { percentage: 0, text: 'Força da senha', color: 'transparent' };
+        return { percentage: 0, text: 'Password strength', color: 'transparent' };
     }
     
     // Length check
@@ -113,13 +113,13 @@ function calculatePasswordStrength(password) {
     
     // Determine feedback and color
     if (strength < 40) {
-        feedback = 'Fraca';
+        feedback = 'Weak';
         color = '#DC3545';
     } else if (strength < 80) {
-        feedback = 'Média';
+        feedback = 'Medium';
         color = '#FFC107';
     } else {
-        feedback = 'Forte';
+        feedback = 'Strong';
         color = '#28A745';
     }
     
@@ -143,14 +143,14 @@ function setupLoginForm() {
         try {
             // Usar o AuthManager para login
             if (!window.authManager) {
-                showNotification('Sistema de autenticação não carregado', 'error');
+                showNotification('Authentication system did not load', 'error');
                 return;
             }
             
             const result = await window.authManager.signIn(email, password);
             
             if (result.success) {
-                showNotification('✅ Login realizado com sucesso! Redirecionando...', 'success');
+                showNotification('✅ Signed in successfully! Redirecting...', 'success');
                 
                 setTimeout(() => {
                     window.location.href = 'https://projeto-luckpet.vercel.app/';
@@ -193,14 +193,14 @@ function setupSignupForm() {
         try {
             // Usar o AuthManager para cadastro
             if (!window.authManager) {
-                showNotification('Sistema de autenticação não carregado', 'error');
+                showNotification('Authentication system did not load', 'error');
                 return;
             }
             
             const result = await window.authManager.signUp(email, password, name, avatar);
             
             if (result.success) {
-                showNotification('🎉 Conta criada com sucesso! Você ganhou 50 LuckCoins!', 'success');
+                showNotification('🎉 Account created successfully! You earned 50 LuckCoins!', 'success');
                 
                 // Mudar para aba de login
                 setTimeout(() => {
@@ -214,7 +214,7 @@ function setupSignupForm() {
 
         } catch (error) {
             console.error('❌ Erro no cadastro:', error);
-            showNotification('Erro ao criar conta. Tente novamente.', 'error');
+            showNotification('Could not create the account. Please try again.', 'error');
         } finally {
             submitButton.classList.remove('loading');
             submitButton.querySelector('.btn-text').textContent = originalText;
@@ -304,20 +304,20 @@ function setupGuestLogin() {
             
             const submitButton = this;
             const originalText = submitButton.innerHTML;
-            submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Entrando...';
+            submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Signing in...';
             submitButton.disabled = true;
             
             try {
                 // Usar o AuthManager para login como convidado
                 if (!window.authManager) {
-                    showNotification('Sistema de autenticação não carregado', 'error');
+                    showNotification('Authentication system did not load', 'error');
                     return;
                 }
                 
                 const result = await window.authManager.signInAsGuest();
                 
                 if (result.success) {
-                    showNotification(`🎉 Bem-vindo, ${result.user.nome}! Modo convidado ativado. Você ganhou 25 LuckCoins!`, 'success');
+                    showNotification(`🎉 Welcome, ${result.user.nome}! Guest mode is active. You earned 25 LuckCoins!`, 'success');
                     
                     setTimeout(() => {
                         window.location.href = 'https://projeto-luckpet.vercel.app/';
