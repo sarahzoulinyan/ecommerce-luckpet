@@ -314,7 +314,7 @@ class AuthManager {
         
         if (userName) userName.textContent = this.profile.nome;
         if (profileName) profileName.textContent = this.profile.nome;
-        if (profileLevel) profileLevel.textContent = `Nível ${this.profile.nivel}`;
+        if (profileLevel) profileLevel.textContent = `Level ${this.profile.nivel}`;
     }
     
     updateUserCredits() {
